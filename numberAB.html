@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col mt-3">
+
+                <div class="row mt-3 ">
+                    <div class="col">
+                        <button type="button" class="btn btn-primary" id="start">開始遊戲</button>
+
+                    </div>
+                    <div class="col">
+
+                        <button type="button" class="btn btn-success" id="answer">看答案</button>
+                    </div>
+
+                </div>
+                <div class="row mt-3">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="請輸入四位數字" aria-label="Recipient's username" aria-describedby="basic-addon2"
+                            id="input">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="inputans">輸入</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+
+                    <div class="col mb-3">
+                        <button type="button" class="btn btn-danger" id="giveup">放棄重來</button>
+                    </div>
+                    <input type="text" class="form-control" placeholder="答案" aria-label="Recipient's username" aria-describedby="basic-addon2"
+                        id="hits">
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="col mt-2">
+                <div class="card border-info mb-3 mt-3" style="max-width: 18rem;">
+                    <ul class="list-group ">
+                        <li class="list-group-item">遊戲歷程</li>
+                        <li class="list-group-item list-group-item-primary" id="listgroup"></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <script>
+            var randomnumber;
+            var clean = document.getElementById("giveup")
+            clean.onclick = function () {
+                document.getElementById("input").value = "";
+            }
+            var answer = document.getElementById("start");
+            answer.onclick = function () {
+                do {
+                    a = Math.floor(Math.random() * 10)
+                    b = Math.floor(Math.random() * 10)
+                    c = Math.floor(Math.random() * 10)
+                    d = Math.floor(Math.random() * 10)
+                }
+
+                while (iscorrect(a, b, c, d));
+                randomnumber = [a, b, c, d]
+                console.log(randomnumber);  //亂數有成功產生
+
+            }
+            var lookans = document.getElementById("answer")
+            lookans.onclick = function () {
+                document.getElementById("hits").value = randomnumber;//無法顯示在看答案的格子內
+            }
+
+            function iscorrect(n1, n2, n3, n4) {
+                var ans = flase;
+                if (n1 == n2 || n1 == n3 || n1 == n4 || n2 == n3 || n2 == n4 || n1 == 0) {
+                    ans = true;
+                }
+                return (ans);
+            }
+            function iscorrect() {
+                var ans = false;
+                if (a == b || a == c || a == d || b == c || c == d || b == d || a == 0) {
+                    ans = true;
+                }
+                return (ans);
+            }
+            //<幾ＡＢ 判斷>
+
+            var A = 0;
+            var B = 0;
+            var inputans = document.getElementById("inputans");
+            inputans.onclick = function () {
+                var guess = ["", "", "", ""];
+                var guess = document.getElementById("input").value.split("");
+                //alert(guess);
+                console.log(guess);
+                for (var i = 0; i < 4; i++) {
+                    for (var j = 0; j < 4; j++) {
+                        if (guess[i] == randomnumber[j]) {
+                            if (i == j)
+                                A++;
+                            else if (i != j)
+                                B++;
+                        }
+                    }
+                }
+                console.log("A" + A + "B" + B);
+                var showans = document.createElement("li");
+                var varyguess=document.createTextNode(guess+""+ "A" + A + "B" + B+" ");
+               
+                document.getElementById("listgroup").appendChild(varyguess);
+    
+            }
+
+
+
+
+
+
+        </script>
+
+</body>
+
+</html>
