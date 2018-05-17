@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1"
+        crossorigin="anonymous">
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+
+    <style>
+        .body-list ul {
+            width: 100%;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .body-list ul li {
+            width: 14.28%;
+            height: 36px;
+            line-height: 36px;
+            list-style-type: none;
+            box-sizing: border-box;
+            display: block;
+            float: left;
+            text-align: center;
+        }
+
+        .lightgrey {
+            color: gray;
+        }
+
+        #weekname {
+            color: rgb(18, 173, 134);
+        }
+
+        #monthid {
+            color: rgb(2, 51, 12);
+        }
+
+        #yearid {
+            color: rgb(18, 173, 121);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col text-left">
+                <button type="button" class="btn btn-outline-info" id="back">
+                    <i class="fas fa-angle-double-left"></i>
+                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="newthing">新增新行程</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">日期</label>
+                                        <input type="date" class="form-control" id="date" placeholder="name@example.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">時間</label>
+                                        <input type="time" class="form-control" id="time">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">地點</label>
+                                        <input type="text" class="form-control" id="_addressmap">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect2">事項</label>
+                                        <textarea class="form-control" id="thing" rows="3"></textarea>
+
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">顏色</label>
+                                        <input id="color" type="color">
+
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cleanthing">Close</button>
+                                <button type="button" class="btn btn-primary" id="savething">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col text-center">
+                <h1 id="monthid">Month</h1>
+                <h1 id="yearid">year</h1>
+            </div>
+
+            <div class="col text-right">
+                <button type="button" class="btn btn-outline-info" id="next">
+
+                    <i class="fas fa-angle-double-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col text-center">
+                <div class="lightgrey body-list">
+                    <ul id="weekname">
+                        <li>SUN</li>
+                        <li>MON</li>
+                        <li>TUE</li>
+                        <li>WED</li>
+                        <li>THU</li>
+                        <li>FRI</li>
+                        <li>SAT</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col text-center">
+                <div class="darkgrey body-list">
+                    <ul id="days">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="map" style="width:100px ;height: 100px"> <!--新增地圖-->
+        <!-- Modal -->
+        <div class="modal fade" id="newthingmodal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="modelTitleId"></h4>
+                    </div>
+                    <div class="modal-body" id="txtshow">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="newthingmodal1" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="modelTitleId"></h4>
+                    </div>
+                    <div class="modal-body" id="txtshow">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9oRF3p4Uk53imn4Xsv-uORuD0QfgzbWg" defer></script>
+    <script>
+ 
+        var olympic = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];//閏年
+        var normal = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];//平年
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var date = new Date();
+        var year = date.getFullYear();//取得年份
+        var month = date.getMonth();//取得月份
+        var day = date.getDate();//取得日期
+
+
+        function dayStart(y, m) {
+            var firstDay = new Date(y, m, 1);
+            return (firstDay.getDay());
+        }
+
+        function daylast(y, m) {
+            var lastDay = new Date(y, m + 1, 0);
+            return (lastDay.getDate());
+        }
+
+        function daylasts(y, m) {
+            var lastDay = new Date(y, m + 1, 0);
+            return (lastDay.getDay());
+        }
+
+        function monthlast(y, m) {
+            var lastmonth = new Date(y, 12, 0);
+            return (lastmonth.getDate());
+        }
+
+        function daysMonth(y, m) {
+            if (((y % 4) == 0) && ((y % 100) != 0) || ((y % 400) !== 0)) {
+                return (olympic[m]);
+            } else {
+                return (normal[m]);
+            }
+        }
+
+        var days = document.getElementById("days");
+        var monday = document.getElementById("monthid");
+        var years = document.getElementById("yearid");
+
+        var All_li = document.getElementsByTagName("li");
+        //var addressmap = document.getElementById("_addressmap").innerText;
+
+
+        var NewCArdthings = function () {
+            for (var li of All_li) {
+                //li.onclick = function () {
+                //newcardthings 
+                li.onclick = function () {
+                    console.log(this.innerText);
+                    // console.log(dataarray[0].day);
+                    document.getElementById("txtshow").innerHTML = "";
+                    var items = JSON.parse(localStorage.getItem("today"));
+                    var index = 0;
+                    for (item of items) {
+                        console.log("this.innerText", this.innerText)
+                        console.log("item.day", item.day);
+                        console.log(item.month + " " + month + " " + year + " " + item.year);
+                        if (this.innerText == item.day && (month + 1) == parseInt(item.month, 10) && year == item.year) {
+
+                            //document.getElementById("test").innerText += dataarray[0].day;
+                            console.log(document.getElementById("txtshow").innerHTML);
+
+                            var card = document.createElement("div");
+                            card.className = "card border-info mb-3";
+                            card.style = "max-width:18rem;";
+                            var cardheader = document.createElement("div");
+                            cardheader.className = "card-header";
+
+                            cardheader.id = "test";
+                            var cardbody = document.createElement("div");
+                            var modalbody=document.createElement("div");//
+                            var closebody = document.createElement("div");
+                            closebody.className = "float-right";
+                            cardbody.className = "card-body text-info";
+                            modalbody.className="float-right"//
+                            var p = document.createElement("p");
+                            var close = document.createElement("button");
+                            var mdbody=document.createElement("button");//
+                            mdbody.type="button";//
+                            close.type = "button";
+                            mdbody.className="btn btn-light";//
+                            mdbody.innerText = '地點';
+                            
+                            close.className = "btn btn-light";
+                            var i = document.createElement("i");
+                            i.className = "fas fa-times";
+                            p.id = "testtitle";
+                            //<button type="button" class="btn btn-light"><i class="fas fa-times"></i></button>
+                            p.className = "card-text";
+
+                            close.value = item.index;
+                            cardheader.innerText = item.time;
+
+                            p.innerText = item.text;
+                            p.style.color = item.color;
+                            close.onclick = function () {
+                                var store = JSON.parse(localStorage.getItem("today"));
+                                store.splice(this.value, 1);
+                                localStorage.setItem("today", JSON.stringify(store));
+                                location.reload();
+                            }
+
+                            close.appendChild(i);
+                            closebody.appendChild(close);
+                            cardheader.appendChild(closebody);
+                            cardbody.appendChild(p);
+                            modalbody.appendChild(mdbody);
+                            cardbody.appendChild(modalbody);//
+                            card.appendChild(cardheader);
+                            card.appendChild(cardbody);
+                            var modal = document.getElementById("txtshow");
+                            modal.appendChild(card);
+
+                            console.log(item._address);
+                            addressturn(item._address);
+                        }
+                        else {
+                            // document.getElementById("test").innerText = "";
+                        }
+                    }
+                    //var addressmap =localStorage["_addressmap"] ;
+
+                    //addressturn(addressmap);
+
+                }
+            }
+        }
+        //215
+        var map;
+
+       // var directionsDisplay = new google.maps.DirectionsRenderer;
+       // directionsDisplay.setMap(map);
+        function addressturn(addressmap) {
+            //var items = JSON.parse(this.responseText);
+
+            if (addressmap === '')
+                return;
+
+            var geocodingAPIRequest = new XMLHttpRequest();
+            geocodingAPIRequest.open('GET', 'https://maps.googleapis.com/maps/api/geocode/json?address=' + addressmap + '&key=AIzaSyA9oRF3p4Uk53imn4Xsv-uORuD0QfgzbWg', false);
+            geocodingAPIRequest.send();
+
+          //  var result = JSON.parse(geocodingAPIRequest.responseText);
+            //if (result.status === 'OK') {
+            var marker = new google.maps.Marker({
+               position: { lat: result.results[0].geometry.location.lat, lng: result.results[0].geometry.location.lng },
+               map: map,
+            });
+            //}
+            // console.log(
+            //     "address: " + addressmap +
+            //     "lat: " + result.results[0].geometry.location.lat +
+            //     "lng: " + result.results[0].geometry.location.lng + "<br />"
+            // );
+        }
+
+
+
+
+
+        window.onload = function () {
+            NewCArdthings();
+            if (localStorage["today"] != null) {
+
+            }
+        }
+
+        function refreshDate() {
+
+            var str = "";
+            var totalDays = daysMonth(year, month);//月份總天份
+            var firstDays = dayStart(year, month);//月的第一天是星期幾
+            var monthDays = monthlast(year, month);
+            var lastDays = daylast(year, month);
+            var lastDayss = daylasts(year, month);
+
+            var li;
+            var k = monthDays - firstDays + 1;
+            for (var i = 0; i < firstDays; i++) {
+                str += "<li class='lightgrey'> " + k + "</li>";
+                k++;
+            }
+
+            for (var i = 1; i <= totalDays; i++) {
+                if ((i < day && year == date.getFullYear() && month == date.getMonth()) ||
+                    year < date.getFullYear() || (year == date.getFullYear() && month < date.getMonth())) {
+                    li = " class ='lightgrey' ";
+                }
+                else if (i == day && year == date.getFullYear() && month == date.getMonth()) {
+                    li = " class='green greenbox' data-toggle='modal' data-target='#newthingmodal'";
+                }
+
+                else {
+                    li = " class='darkgrey'data-toggle='modal' data-target='#newthingmodal' ";
+                }
+
+                str += "<li" + li + "id=" + i.toString() + ">" + i + "</li>";
+
+                if (i == lastDays) {
+                    var k = 1;
+                    for (var j = lastDayss; j < 6; j++) {
+                        str += "<li class='lightgrey'> " + k + "</li>";
+                        k++;
+                    }
+                }
+            }
+            console.log(document.getElementsByTagName("li"))
+
+            days.innerHTML = str;
+            monday.innerHTML = months[month];
+            years.innerHTML = year;
+
+        }
+        refreshDate();
+
+
+        var btnPrev = document.getElementById("back");
+        btnPrev.onclick = function () {
+            month--;
+            if (month < 0) {
+                year--;
+                month = 11;
+            }
+            days.innerHTML = "";
+            refreshDate();
+            NewCArdthings();
+        }
+
+        var btnNext = document.getElementById("next");
+        btnNext.onclick = function () {
+            month++;
+            if (month > 11) {
+                year++;
+                month = 0;
+            }
+            days.innerHTML = "";
+            refreshDate();
+            NewCArdthings();
+        }
+        //var array = new Array;
+        var dataarray = [];
+        var index = 0;
+        document.getElementById("savething").onclick = function () {
+            var dd = document.getElementById("date").value;
+            var array = dd.split("-");
+            //address in  map 
+            //var request = new XMLHttpRequest();
+            //var geocodingAPIRequest = new XMLHttpRequest();
+
+            console.log(array)
+            var y = array[0]
+            var m = array[1]
+            var d = array[2]
+            var Date = {
+                year: y,
+                month: m,
+                day: d,
+                time: time.value,
+                text: thing.value,
+                color: color.value,
+                index: index,
+                _address: _addressmap.value
+            };
+            dataarray.push(Date);
+            index++;
+            var JSONdataarray = JSON.stringify(dataarray);
+            window.localStorage["today"] = JSONdataarray;
+            var todayy = window.localStorage["today"];
+            var todayyy = JSON.parse(todayy);
+            // console.log("todayyy", todayyy);
+            // console.log(dataarray)
+            NewCArdthings();
+
+        }
+
+
+
+
+
+
+
+       //window.localStorage
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
